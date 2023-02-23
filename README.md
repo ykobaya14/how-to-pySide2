@@ -1,5 +1,5 @@
-# how-to-pySide2
-python3とpySide2使ってやる
+# how-to-pySide6
+python3とpySide6使ってやる
 
 
 これでビルドした
