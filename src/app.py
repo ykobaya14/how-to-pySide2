@@ -6,7 +6,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("フォルダ作成")
-        self.setGeometry(100, 100, 400, 200)
+        self.setGeometry(100, 100, 320, 200)
 
         self.year_label = QLabel("対象の年を入力してください（例：2022）", self)
         self.year_label.move(20, 20)
@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.year_textbox.move(20, 50)
         self.year_textbox.resize(280, 40)
 
-        self.folder_label = QLabel("保存先を選択してください", self)
+        self.folder_label = QLabel("", self)
         self.folder_label.move(20, 100)
         self.folder_label.adjustSize()
 
@@ -41,6 +41,10 @@ class MainWindow(QMainWindow):
 
     def create_folders(self):
         year = self.year_textbox.text()
+        if not year:
+            self.folder_label.setText("対象の年を入力してください")
+            self.folder_label.adjustSize()
+            return
         if not self.selected_folder:
             self.folder_label.setText("保存先を選択してください")
             self.folder_label.adjustSize()
@@ -48,6 +52,7 @@ class MainWindow(QMainWindow):
         for month in range(1, 13):
             folder_name = f"{year}-{month:02}"
             full_path = os.path.join(self.selected_folder, folder_name)
+            self.folder_label.setText("成功しました")
             if not os.path.exists(full_path):
                 os.mkdir(full_path)
 
